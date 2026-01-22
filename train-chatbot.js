@@ -11,8 +11,8 @@ const Intent = require('./models/Intent');
 // Training data - Add your own intents here!
 const trainingData = [
   // About the Bot
-  { keyword: 'who are you', response: 'I am an AI Chatbot Assistant, created to help answer your questions and have conversations with you!' },
-  { keyword: 'your name', response: 'I am an AI Assistant. You can call me ChatBot!' },
+  { keyword: 'who are you', response: 'I am an Arise Assistant, created by Prince Chauhan!' },
+  { keyword: 'what is your name', response: 'I am arise assistant. You can call me ChatBot!' },
   { keyword: 'what is my friends name', response: 'master your friends name is piyush,ankesh and ayush' },
   { keyword: 'how old are you', response: 'I was just created recently, so I\'m quite young in bot years!' },
   
@@ -166,21 +166,31 @@ const trainChatbot = async () => {
     console.log(`📚 Adding ${trainingData.length} intents to the database\n`);
 
     let addedCount = 0;
+    let updatedCount = 0;
     let skippedCount = 0;
     let errorCount = 0;
 
     for (const data of trainingData) {
       try {
         // Check if intent already exists
-        const existing = await Intent.findOne({ keyword: data.keyword.toLowerCase() });
+        const keyword = data.keyword.toLowerCase();
+        const existing = await Intent.findOne({ keyword });
         
         if (existing) {
-          console.log(`⏭️  Skipped: "${data.keyword}" (already exists)`);
-          skippedCount++;
+          if (existing.response !== data.response) {
+            // Update existing intent
+            existing.response = data.response;
+            await existing.save();
+            console.log(`🔄 Updated: "${data.keyword}" (response changed)`);
+            updatedCount++;
+          } else {
+            console.log(`⏭️  Skipped: "${data.keyword}" (already exists and matches)`);
+            skippedCount++;
+          }
         } else {
           // Add new intent
           const intent = new Intent({
-            keyword: data.keyword.toLowerCase(),
+            keyword: keyword,
             response: data.response
           });
           await intent.save();
@@ -188,7 +198,7 @@ const trainChatbot = async () => {
           addedCount++;
         }
       } catch (error) {
-        console.log(`❌ Error adding "${data.keyword}": ${error.message}`);
+        console.log(`❌ Error processing "${data.keyword}": ${error.message}`);
         errorCount++;
       }
     }
@@ -197,7 +207,8 @@ const trainChatbot = async () => {
     console.log('🎉 Training Complete!');
     console.log('='.repeat(50));
     console.log(`✅ Successfully added: ${addedCount} intents`);
-    console.log(`⏭️  Skipped (duplicates): ${skippedCount} intents`);
+    console.log(`🔄 Successfully updated: ${updatedCount} intents`);
+    console.log(`⏭️  Skipped (no changes): ${skippedCount} intents`);
     console.log(`❌ Errors: ${errorCount} intents`);
     console.log(`📊 Total in database: ${await Intent.countDocuments()} intents`);
     console.log('='.repeat(50));

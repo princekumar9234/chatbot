@@ -14,11 +14,16 @@ const addIntent = async (req, res, next) => {
     });
 
     if (existingIntent) {
-      return res.status(400).json({
-        success: false,
-        error: {
-          message: 'This keyword already exists'
-        }
+      // Update existing intent instead of failing
+      existingIntent.response = response.trim();
+      await existingIntent.save();
+      
+      return res.status(200).json({
+        success: true,
+        data: {
+          intent: existingIntent
+        },
+        message: 'Intent updated successfully (keyword already existed)'
       });
     }
 

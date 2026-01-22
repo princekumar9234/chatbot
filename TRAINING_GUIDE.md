@@ -28,7 +28,7 @@ node train-chatbot.js
 ### What it does:
 - ✅ Adds 80+ pre-written intents
 - ✅ Covers topics: greetings, knowledge, emotions, jokes, motivation
-- ✅ Skips duplicates automatically
+- ✅ Updates existing intents if response changes
 - ✅ Shows progress in real-time
 
 ### Expected Output:
@@ -329,7 +329,7 @@ node train-chatbot.js
 ## ⚠️ Common Issues
 
 ### Issue 1: "Keyword already exists"
-**Solution:** Each keyword must be unique. Delete the old one first or use a different keyword.
+**Solution:** Actually, the chatbot now supports **automatic updates**! If you add a keyword that already exists, it will simply update the response with the new one you provided. You don't need to delete it first.
 
 ### Issue 2: Bot not responding to new intent
 **Solution:** 
