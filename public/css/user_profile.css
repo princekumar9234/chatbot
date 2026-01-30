@@ -1,0 +1,339 @@
+
+/* ========== USER PROFILE IN HEADER ========== */
+
+.user-controls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-profile-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.user-profile-pill:hover {
+  transform: scale(1.05);
+}
+
+.user-img-container {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+
+.user-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logout-icon-btn {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 77, 77, 0.1);
+  border-radius: 50%;
+  color: #ff8080;
+  border: 1px solid rgba(255, 77, 77, 0.2);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.logout-icon-btn:hover {
+  background: rgba(255, 77, 77, 0.2);
+  transform: translateY(-2px);
+  color: #ff4d4d;
+  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.2);
+}
+
+.logout-icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ========== PROFILE MODAL RESTYLE ========== */
+
+.profile-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-modal-overlay.show {
+  opacity: 1;
+}
+
+.profile-modal-content {
+  background: #1a1a1a; /* Darker bg like screenshot */
+  width: 90%;
+  max-width: 380px;
+  max-height: 85vh;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.profile-modal-overlay.show .profile-modal-content {
+  transform: translateY(0);
+}
+
+/* Modal Header */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  /* border-bottom: 1px solid rgba(255,255,255,0.05); */
+}
+
+.modal-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.back-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+.save-btn {
+  background: none;
+  border: none;
+  color: #4ade80; /* Green accent */
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* Profile Summary */
+.profile-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem 1.5rem;
+  text-align: center;
+}
+
+.profile-summary-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #333;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.profile-summary-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-display-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+}
+
+.profile-handle {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0 0 1rem 0;
+}
+
+.edit-profile-btn {
+  background: transparent;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-profile-btn:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: #666;
+}
+
+/* Settings Group */
+.settings-group {
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+
+.group-title {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.settings-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 10px;
+}
+
+.settings-item:hover {
+  background: rgba(255,255,255,0.05);
+}
+
+.item-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.item-text {
+  flex: 1;
+  font-size: 1rem;
+  color: #fff;
+  text-align: left;
+}
+
+.item-text .main-text {
+    line-height: 1.2;
+}
+.item-text .sub-text {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Edit Form */
+.edit-form {
+    padding: 1rem 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #667eea;
+}
+
+.edit-avatar {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.edit-avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.change-photo-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    padding: 4px 0;
+}
+
+.change-photo-badge svg {
+    width: 16px;
+    height: 16px;
+    color: #fff;
+}
+
+.form-note {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+    margin-top: 1rem;
+    font-style: italic;
+}

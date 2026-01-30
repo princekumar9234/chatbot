@@ -7,6 +7,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const Intent = require("./models/Intent"); //require  intent model
+const { response } = require("express");
 
 // Training data - Add your own intents here!
 const trainingData = [
@@ -15,6 +16,8 @@ const trainingData = [
     keyword: "who are you",
     response: "I am an Arise Assistant, created by Prince Chauhan!",
   },
+  { keyword: "i love you", response: "sorry but i love only girls." },
+  
   { keyword: "what is my nickname", response: "my nickname is chiku !" },
   {
     keyword: "how old are you",

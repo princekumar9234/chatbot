@@ -4,11 +4,15 @@ const mongoose = require('mongoose');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
+
 // Import middlewares
 const logger = require('./middlewares/logger');
 const errorHandler = require('./middlewares/errorHandler');
 
 // Import routes
+const authRoutes = require('./routes/authRoutes');
 const viewRoutes = require('./routes/viewRoutes');
 const chatRoutes = require('./routes/chatRoutes');
 const adminRoutes = require('./routes/adminRoutes');
@@ -21,6 +25,23 @@ const app = express();
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Session middleware
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'chatbot_secret_key',
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({ 
+    mongoUrl: process.env.MONGODB_URI 
+  }),
+  cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
+}));
+
+// Passport config and middleware
+const passport = require('passport');
+require('./config/passport')(passport); // Passport config
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Request logging middleware
 app.use(logger);
@@ -98,10 +119,12 @@ connectDB();
 // ========== ROUTES ==========
 
 // View routes
+app.use('/auth', authRoutes);
 app.use('/', viewRoutes);
 
 // API routes
-app.use('/api', chatRoutes);
+const { ensureAuthenticated } = require('./middlewares/auth');
+app.use('/api', ensureAuthenticated, chatRoutes);
 app.use('/api/admin', adminRoutes);
 
 // 404 handler
