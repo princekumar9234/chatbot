@@ -2,7 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const fs = require('fs');
 const bodyParser = require('body-parser');
+
+// Ensure upload directories exist
+const uploadDir = path.join(__dirname, 'public/uploads/profile');
+if (!fs.existsSync(uploadDir)){
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
@@ -135,7 +142,7 @@ app.use('/api', ensureAuthenticated, chatRoutes);
 app.use('/api/admin', adminRoutes);
 
 // Serve React app for all other routes (client-side routing)
-app.get('/{*path}', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 

@@ -1,0 +1,11 @@
+{
+  "name": "simple-chat-root",
+  "version": "1.0.0",
+  "description": "Root package for Simple Chat project deployment",
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend && npm install && node app.js",
+    "dev": "cd backend && npm run dev"
+  }
+}

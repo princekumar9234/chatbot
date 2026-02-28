@@ -14,6 +14,7 @@ Arise is a premium, modern AI chatbot application built with the MERN stack (Mon
 - **Dark Mode**: Fully synced Dark/Light theme support that persists in your browser.
 - **Account Controls**: Secure logout and permanent account deletion options.
 - **AI Chat Experience**: Interactive chat interface with typing indicators and conversational flow.
+- **Chatbot Training**: Administrators can add, view, and delete chatbot knowledge (keywords/responses) directly from their profile or admin panel.
 - **Responsive Design**: Optimized for Desktop, Tablet, and Mobile devices.
 
 ## 🚀 Tech Stack
@@ -27,6 +28,15 @@ Arise is a premium, modern AI chatbot application built with the MERN stack (Mon
 
 ## 🛠️ Installation & Setup
 
+### Quick Start (Recommended)
+From the root directory:
+```bash
+npm run install:all
+npm run build
+npm run start
+```
+
+### Manual Setup
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/princekumar9234/Simple-ChatBot.git
@@ -41,7 +51,7 @@ Arise is a premium, modern AI chatbot application built with the MERN stack (Mon
    Create a `.env` file in the `backend` folder:
    ```env
    PORT=3000
-   MONGODB_URI=your_mongodb_uri
+   MONGODB_URI=your_mongodb_uri (e.g., mongodb://localhost:27017/chatbot_db)
    SESSION_SECRET=your_secret_key
    ```
 
@@ -53,7 +63,6 @@ Arise is a premium, modern AI chatbot application built with the MERN stack (Mon
    ```
 
 4. **Start the Application**:
-   Go back to the `backend` folder and start the server:
    ```bash
    cd ../backend
    npm run dev

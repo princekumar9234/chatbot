@@ -132,7 +132,7 @@ export default function Chat({ user, setUser, isDarkMode, toggleTheme }) {
     setUser(null);
   };
 
-  const avatarUrl = user?.profileImage ? (user.profileImage.startsWith('http') ? user.profileImage : `http://localhost:3000${user.profileImage}`) : 
+  const avatarUrl = user?.profileImage ? (user.profileImage.startsWith('http') ? user.profileImage : `${user.profileImage}`) : 
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.username || 'U')}&background=random&color=fff`;
 
   return (

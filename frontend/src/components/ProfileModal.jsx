@@ -105,7 +105,7 @@ export default function ProfileModal({ user, setUser, onClose, isDarkMode, toggl
     }
   };
 
-  const avatarUrl = previewUrl || (user?.profileImage ? (user.profileImage.startsWith('http') ? user.profileImage : `http://localhost:3000${user.profileImage}`) : 
+  const avatarUrl = previewUrl || (user?.profileImage ? (user.profileImage.startsWith('http') ? user.profileImage : `${user.profileImage}`) : 
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.username || 'U')}&background=6366f1&color=fff&bold=true`);
 
   const provider = user?.googleId ? 'Google' : user?.githubId ? 'GitHub' : 'Email';
