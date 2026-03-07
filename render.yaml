@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: simple-chatbot
+    env: node
+    plan: free
+    buildCommand: cd backend && npm install && cd ../frontend && npm install && npm run build
+    startCommand: cd backend && node app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
